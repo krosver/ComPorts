@@ -28,6 +28,8 @@ namespace FirstTask
         }
         private void comboBox_COMs_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            textBox_MsgGet.Text = "";
+            textBox_MsgSet.Text = "";
             var portName = comboBox_COMs.Text;
             try
             {
