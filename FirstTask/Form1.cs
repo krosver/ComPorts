@@ -11,11 +11,14 @@ using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Diagnostics;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace FirstTask
 {
     public partial class Form1 : Form
     {
+        CanMsg msg = new CanMsg();
         private Config config;
         private Dictionary<string, string> msgData = new Dictionary<string, string>()
         {
@@ -29,18 +32,16 @@ namespace FirstTask
             {"ASCII",""},
             {"Коментарий",""},
         };
-        private string[] ports;
-        private Keys[] correctKeys = new Keys[]
-            {
-                Keys.A, Keys.B, Keys.C,Keys.D,Keys.E,Keys.F,
-                Keys.D0,Keys.D1,Keys.D2,Keys.D3,Keys.D4,Keys.D5,Keys.D6,Keys.D7,Keys.D8,Keys.D9
-            };
+        private string[] ports => SerialPort.GetPortNames();
+
         private bool nonNumberEntered;
+        private TextBox[] dataBoxes;
         public Form1()
         {
             InitializeComponent();
             GetAllPorst();
             config = JsonSerializer.Deserialize<Config>(File.OpenRead("config.json"));
+            dataBoxes = new TextBox[] { Data8, Data7, Data6, Data5, Data4, Data3, Data2, Data1 };
         }
         private void AddMessage(ListView listView)
         {
@@ -57,10 +58,6 @@ namespace FirstTask
         }
         private void GetAllPorst()
         {
-            if (SerialPort.GetPortNames().Length != 0)
-            {
-                ports = SerialPort.GetPortNames();
-            }
             COMs.Items.Clear();
             trigger_com.Items.Clear();
 
@@ -69,94 +66,95 @@ namespace FirstTask
             trigger_com.Items.Add("Все");
             trigger_com.Items.AddRange(ports);
         }
-        #region Проверка на ввод 16-ричной системы
-        private void EnteringNumber(object sender, KeyEventArgs e)
+        private void SetMessageButton_click(object sender, EventArgs e)
         {
-            nonNumberEntered = true;
-            if (correctKeys.Contains(e.KeyCode) || e.KeyCode == Keys.Shift || e.KeyCode == Keys.Back)
+            //msg.CH = COMs.Text;
+            //msg.Flags = "COM";
+            msg.ID = int.Parse(ID.Text);
+            msg.DLC = int.Parse(DLC.Text); 
+            msg.Data = new int[]{
+                int.Parse(Data8.Text,NumberStyles.HexNumber), int.Parse(Data7.Text,NumberStyles.HexNumber), int.Parse(Data6.Text,NumberStyles.HexNumber),
+                int.Parse(Data5.Text,NumberStyles.HexNumber), int.Parse(Data4.Text,NumberStyles.HexNumber), int.Parse(Data3.Text,NumberStyles.HexNumber),
+                int.Parse(Data2.Text,NumberStyles.HexNumber), int.Parse(Data1.Text,NumberStyles.HexNumber)};
+            //msg.Comment = Comment.Text;
+            msg.RTR =Convert.ToInt32(RTR.Checked);
+            msg.Bit29 = Convert.ToInt32(bit29.Checked);
+            MessageBox.Show(msg.ToString());
+            CRC();
+        }
+
+        private void DLC_TextChanged(object sender, EventArgs e)
+        {
+            int.TryParse(DLC.Text, out var dlc);
+            if (dlc != 9)
             {
-                nonNumberEntered = false;
+                for (int i = 0; i < dlc; i++)
+                {
+                    dataBoxes[i].Enabled = true;
+                }
+                for (int i = dlc; i < 8; i++)
+                {
+                    dataBoxes[i].Enabled = false;
+                }
+            }
+            else
+                DLC.Text = "8";
+        }
+
+        private void Data_TextChanged(object sender, EventArgs e)
+        {
+            var tb = sender as TextBox;
+            if (tb.Text.Length > 0)
+            {
+                CultureInfo provider = new CultureInfo("en-US");
+                var isInt = int.TryParse(tb.Text, NumberStyles.HexNumber, provider, out var dlc);
+                if (!isInt)
+                {
+                    MessageBox.Show("Неверный формат числа");
+                    tb.Text = "00";
+                }
             }
         }
-        private void KeyPressed(object sender, KeyPressEventArgs e)
+
+        private void CRC()
         {
-            if (nonNumberEntered == true)
+            double sum = Math.Pow(msg.Data[0], 15) + Math.Pow(msg.Data[1], 14) + Math.Pow(msg.Data[2], 10) +
+                Math.Pow(msg.Data[3], 8) + Math.Pow(msg.Data[4], 7) + Math.Pow(msg.Data[5], 4) +
+                Math.Pow(msg.Data[6], 3) + Math.Pow(msg.Data[7], 0);
+            long l = (long)sum;
+            var hexstr = l.ToString("X8");
+            var b = 1;
+        }
+
+        private void bit29_CheckedChanged(object sender, EventArgs e)
+        {
+            if (bit29.Checked)
             {
+                // ID 29 бит
+                ID.Text = ID.Text.PadLeft(8, '0');
+                ID.MaxLength = 8;
+            }
+            else
+            {
+                // ID 11 бит
+                ID.Text = ID.Text.Substring(ID.Text.Length - 3);
+                ID.MaxLength = 3;
+            }
+        }
+
+        private void ID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Проверяем, является ли введенный символ цифрой
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                // Если символ не цифра и не управляющий символ, отменяем ввод
                 e.Handled = true;
             }
         }
-        #endregion
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ToBinary("Hello world");
-            Msg msg = new Msg();
-            msg.CH = COMs.Text;
-            msg.Flags = "COM";
-            msg.ID = int.Parse(ID.Text);
-            msg.DLC = int.Parse(DLC.Text);
-            msg.Data = Data1.Text + Data2.Text + Data3.Text + Data4.Text + Data5.Text + Data6.Text + Data7.Text + Data8.Text;
-            msg.Comment = Comment.Text;
-            msg.RTR = RTR.Checked;
-            msg.Bit29 = bit29.Checked;
-            var a = int.Parse(Data1.Text, NumberStyles.HexNumber);
-        }
-        private byte[] ToBinary(string str)
-        {
-            
-            byte[] bytes = System.Text.Encoding.ASCII.GetBytes(str);
-            return bytes;
-        }
 
-        private void Main()
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var port = new SerialPort("COM5");
-            port.Open();
 
-            try
-            {
-                while (true)
-                {
-                    //Message message = await ReadWholeMessage(port.BaseStream);
-                }
-            }
-            catch (OperationCanceledException) { /*нас остановили, выходим */ }
-            catch (ObjectDisposedException) { /* тоже остановили */ }
-            catch (IOException ex)
-            {
-                // а вот это проблема, логируем и бросаем дальше
-            }
-            catch (InvalidDataException ex)
-            {
-                // девайс вернул не то, логируем, нужна повторная инициализация
-            }
-        }
-        async Task<Message> ReadWholeMessage(Stream stream)
-        {
-            var headerBytes = await StreamHelpers.ReadAsync(stream, 3);
-            var type = headerBytes[0];
-            var stringSize = BitConverter.ToUInt16(headerBytes, 1);
-            var stringBytes = await StreamHelpers.ReadAsync(stream, stringSize);
-            var crc = (await StreamHelpers.ReadAsync(stream, 1))[0];
-            // тут проверка crc
-            var text = Encoding.ASCII.GetString(stringBytes);
-            var message = new Message() { Type = type, Text = text };
-            return message;
-        }
-        public static class StreamHelpers
-        {
-            static public async Task<byte[]> ReadAsync(Stream s, int nBytes)
-            {
-                var buf = new byte[nBytes];
-                var readpos = 0;
-                while (readpos < nBytes)
-                {
-                    var actuallyRead = await s.ReadAsync(buf, readpos, nBytes - readpos);
-                    if (actuallyRead == 0)
-                        throw new EndOfStreamException();
-                    readpos += actuallyRead;
-                }
-                return buf;
-            }
         }
     }
 }

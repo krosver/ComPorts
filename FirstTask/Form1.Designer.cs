@@ -44,6 +44,7 @@ namespace FirstTask
             this.column_ASCII = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.column_comment = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage_Set = new System.Windows.Forms.TabPage();
+            this.DLC = new System.Windows.Forms.MaskedTextBox();
             this.textBox17 = new System.Windows.Forms.TextBox();
             this.textBox18 = new System.Windows.Forms.TextBox();
             this.textBox19 = new System.Windows.Forms.TextBox();
@@ -72,16 +73,15 @@ namespace FirstTask
             this.bit29 = new System.Windows.Forms.CheckBox();
             this.Comment = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.Data8 = new System.Windows.Forms.TextBox();
-            this.Data7 = new System.Windows.Forms.TextBox();
-            this.Data6 = new System.Windows.Forms.TextBox();
-            this.Data5 = new System.Windows.Forms.TextBox();
-            this.Data4 = new System.Windows.Forms.TextBox();
-            this.Data3 = new System.Windows.Forms.TextBox();
-            this.Data2 = new System.Windows.Forms.TextBox();
             this.Data1 = new System.Windows.Forms.TextBox();
+            this.Data2 = new System.Windows.Forms.TextBox();
+            this.Data3 = new System.Windows.Forms.TextBox();
+            this.Data4 = new System.Windows.Forms.TextBox();
+            this.Data5 = new System.Windows.Forms.TextBox();
+            this.Data6 = new System.Windows.Forms.TextBox();
+            this.Data7 = new System.Windows.Forms.TextBox();
+            this.Data8 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.DLC = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.ID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -150,6 +150,7 @@ namespace FirstTask
             this.listView1.TabIndex = 9;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // column_CH
             // 
@@ -197,6 +198,7 @@ namespace FirstTask
             // 
             // tabPage_Set
             // 
+            this.tabPage_Set.Controls.Add(this.DLC);
             this.tabPage_Set.Controls.Add(this.textBox17);
             this.tabPage_Set.Controls.Add(this.textBox18);
             this.tabPage_Set.Controls.Add(this.textBox19);
@@ -225,16 +227,15 @@ namespace FirstTask
             this.tabPage_Set.Controls.Add(this.bit29);
             this.tabPage_Set.Controls.Add(this.Comment);
             this.tabPage_Set.Controls.Add(this.label5);
-            this.tabPage_Set.Controls.Add(this.Data8);
-            this.tabPage_Set.Controls.Add(this.Data7);
-            this.tabPage_Set.Controls.Add(this.Data6);
-            this.tabPage_Set.Controls.Add(this.Data5);
-            this.tabPage_Set.Controls.Add(this.Data4);
-            this.tabPage_Set.Controls.Add(this.Data3);
-            this.tabPage_Set.Controls.Add(this.Data2);
             this.tabPage_Set.Controls.Add(this.Data1);
+            this.tabPage_Set.Controls.Add(this.Data2);
+            this.tabPage_Set.Controls.Add(this.Data3);
+            this.tabPage_Set.Controls.Add(this.Data4);
+            this.tabPage_Set.Controls.Add(this.Data5);
+            this.tabPage_Set.Controls.Add(this.Data6);
+            this.tabPage_Set.Controls.Add(this.Data7);
+            this.tabPage_Set.Controls.Add(this.Data8);
             this.tabPage_Set.Controls.Add(this.label4);
-            this.tabPage_Set.Controls.Add(this.DLC);
             this.tabPage_Set.Controls.Add(this.label3);
             this.tabPage_Set.Controls.Add(this.ID);
             this.tabPage_Set.Controls.Add(this.label2);
@@ -248,6 +249,17 @@ namespace FirstTask
             this.tabPage_Set.TabIndex = 1;
             this.tabPage_Set.Text = "Set Message";
             this.tabPage_Set.UseVisualStyleBackColor = true;
+            // 
+            // DLC
+            // 
+            this.DLC.Location = new System.Drawing.Point(212, 27);
+            this.DLC.Mask = "0";
+            this.DLC.Name = "DLC";
+            this.DLC.Size = new System.Drawing.Size(30, 22);
+            this.DLC.TabIndex = 54;
+            this.DLC.Text = "8";
+            this.DLC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.DLC.TextChanged += new System.EventHandler(this.DLC_TextChanged);
             // 
             // textBox17
             // 
@@ -406,7 +418,7 @@ namespace FirstTask
             this.set_bt.TabIndex = 34;
             this.set_bt.Text = "Заполнить";
             this.set_bt.UseVisualStyleBackColor = true;
-            this.set_bt.Click += new System.EventHandler(this.button1_Click);
+            this.set_bt.Click += new System.EventHandler(this.SetMessageButton_click);
             // 
             // Value
             // 
@@ -459,141 +471,125 @@ namespace FirstTask
             this.bit29.TabIndex = 28;
             this.bit29.Text = "29 bit";
             this.bit29.UseVisualStyleBackColor = true;
+            this.bit29.CheckedChanged += new System.EventHandler(this.bit29_CheckedChanged);
             // 
             // Comment
             // 
-            this.Comment.Location = new System.Drawing.Point(414, 26);
+            this.Comment.Location = new System.Drawing.Point(463, 27);
             this.Comment.Name = "Comment";
-            this.Comment.Size = new System.Drawing.Size(729, 22);
+            this.Comment.Size = new System.Drawing.Size(680, 22);
             this.Comment.TabIndex = 27;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(411, 5);
+            this.label5.Location = new System.Drawing.Point(466, 6);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(96, 16);
             this.label5.TabIndex = 26;
             this.label5.Text = "Комментарий";
             // 
-            // Data8
-            // 
-            this.Data8.Location = new System.Drawing.Point(379, 27);
-            this.Data8.MaxLength = 2;
-            this.Data8.Name = "Data8";
-            this.Data8.Size = new System.Drawing.Size(25, 22);
-            this.Data8.TabIndex = 25;
-            this.Data8.Text = "00";
-            this.Data8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Data8.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnteringNumber);
-            this.Data8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPressed);
-            // 
-            // Data7
-            // 
-            this.Data7.Location = new System.Drawing.Point(355, 27);
-            this.Data7.MaxLength = 2;
-            this.Data7.Name = "Data7";
-            this.Data7.Size = new System.Drawing.Size(25, 22);
-            this.Data7.TabIndex = 24;
-            this.Data7.Text = "00";
-            this.Data7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Data7.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnteringNumber);
-            this.Data7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPressed);
-            // 
-            // Data6
-            // 
-            this.Data6.Location = new System.Drawing.Point(331, 27);
-            this.Data6.MaxLength = 2;
-            this.Data6.Name = "Data6";
-            this.Data6.Size = new System.Drawing.Size(25, 22);
-            this.Data6.TabIndex = 23;
-            this.Data6.Text = "00";
-            this.Data6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Data6.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnteringNumber);
-            this.Data6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPressed);
-            // 
-            // Data5
-            // 
-            this.Data5.Location = new System.Drawing.Point(307, 27);
-            this.Data5.MaxLength = 2;
-            this.Data5.Name = "Data5";
-            this.Data5.Size = new System.Drawing.Size(25, 22);
-            this.Data5.TabIndex = 22;
-            this.Data5.Text = "00";
-            this.Data5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Data5.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnteringNumber);
-            this.Data5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPressed);
-            // 
-            // Data4
-            // 
-            this.Data4.Location = new System.Drawing.Point(283, 27);
-            this.Data4.MaxLength = 2;
-            this.Data4.Name = "Data4";
-            this.Data4.Size = new System.Drawing.Size(25, 22);
-            this.Data4.TabIndex = 21;
-            this.Data4.Text = "00";
-            this.Data4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Data4.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnteringNumber);
-            this.Data4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPressed);
-            // 
-            // Data3
-            // 
-            this.Data3.Location = new System.Drawing.Point(259, 27);
-            this.Data3.MaxLength = 2;
-            this.Data3.Name = "Data3";
-            this.Data3.Size = new System.Drawing.Size(25, 22);
-            this.Data3.TabIndex = 20;
-            this.Data3.Text = "00";
-            this.Data3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Data3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnteringNumber);
-            this.Data3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPressed);
-            // 
-            // Data2
-            // 
-            this.Data2.Location = new System.Drawing.Point(235, 27);
-            this.Data2.MaxLength = 2;
-            this.Data2.Name = "Data2";
-            this.Data2.Size = new System.Drawing.Size(25, 22);
-            this.Data2.TabIndex = 19;
-            this.Data2.Text = "00";
-            this.Data2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Data2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnteringNumber);
-            this.Data2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPressed);
-            // 
             // Data1
             // 
-            this.Data1.Location = new System.Drawing.Point(211, 27);
+            this.Data1.Location = new System.Drawing.Point(426, 27);
             this.Data1.MaxLength = 2;
             this.Data1.Name = "Data1";
             this.Data1.Size = new System.Drawing.Size(25, 22);
-            this.Data1.TabIndex = 18;
+            this.Data1.TabIndex = 25;
             this.Data1.Text = "00";
             this.Data1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Data1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnteringNumber);
-            this.Data1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPressed);
+            this.Data1.TextChanged += new System.EventHandler(this.Data_TextChanged);
+            // 
+            // Data2
+            // 
+            this.Data2.Location = new System.Drawing.Point(401, 27);
+            this.Data2.MaxLength = 2;
+            this.Data2.Name = "Data2";
+            this.Data2.Size = new System.Drawing.Size(25, 22);
+            this.Data2.TabIndex = 24;
+            this.Data2.Text = "00";
+            this.Data2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Data2.TextChanged += new System.EventHandler(this.Data_TextChanged);
+            // 
+            // Data3
+            // 
+            this.Data3.Location = new System.Drawing.Point(376, 27);
+            this.Data3.MaxLength = 2;
+            this.Data3.Name = "Data3";
+            this.Data3.Size = new System.Drawing.Size(25, 22);
+            this.Data3.TabIndex = 23;
+            this.Data3.Text = "00";
+            this.Data3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Data3.TextChanged += new System.EventHandler(this.Data_TextChanged);
+            // 
+            // Data4
+            // 
+            this.Data4.Location = new System.Drawing.Point(351, 27);
+            this.Data4.MaxLength = 2;
+            this.Data4.Name = "Data4";
+            this.Data4.Size = new System.Drawing.Size(25, 22);
+            this.Data4.TabIndex = 22;
+            this.Data4.Text = "00";
+            this.Data4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Data4.TextChanged += new System.EventHandler(this.Data_TextChanged);
+            // 
+            // Data5
+            // 
+            this.Data5.Location = new System.Drawing.Point(326, 27);
+            this.Data5.MaxLength = 2;
+            this.Data5.Name = "Data5";
+            this.Data5.Size = new System.Drawing.Size(25, 22);
+            this.Data5.TabIndex = 21;
+            this.Data5.Text = "00";
+            this.Data5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Data5.TextChanged += new System.EventHandler(this.Data_TextChanged);
+            // 
+            // Data6
+            // 
+            this.Data6.Location = new System.Drawing.Point(301, 27);
+            this.Data6.MaxLength = 2;
+            this.Data6.Name = "Data6";
+            this.Data6.Size = new System.Drawing.Size(25, 22);
+            this.Data6.TabIndex = 20;
+            this.Data6.Text = "00";
+            this.Data6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Data6.TextChanged += new System.EventHandler(this.Data_TextChanged);
+            // 
+            // Data7
+            // 
+            this.Data7.Location = new System.Drawing.Point(276, 27);
+            this.Data7.MaxLength = 2;
+            this.Data7.Name = "Data7";
+            this.Data7.Size = new System.Drawing.Size(25, 22);
+            this.Data7.TabIndex = 19;
+            this.Data7.Text = "00";
+            this.Data7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Data7.TextChanged += new System.EventHandler(this.Data_TextChanged);
+            // 
+            // Data8
+            // 
+            this.Data8.Location = new System.Drawing.Point(251, 27);
+            this.Data8.MaxLength = 2;
+            this.Data8.Name = "Data8";
+            this.Data8.Size = new System.Drawing.Size(25, 22);
+            this.Data8.TabIndex = 18;
+            this.Data8.Text = "00";
+            this.Data8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Data8.TextChanged += new System.EventHandler(this.Data_TextChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(208, 5);
+            this.label4.Location = new System.Drawing.Point(248, 5);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(57, 16);
             this.label4.TabIndex = 17;
             this.label4.Text = "Данные";
             // 
-            // DLC
-            // 
-            this.DLC.Location = new System.Drawing.Point(172, 27);
-            this.DLC.Name = "DLC";
-            this.DLC.Size = new System.Drawing.Size(30, 22);
-            this.DLC.TabIndex = 16;
-            this.DLC.Text = "8";
-            this.DLC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(169, 5);
+            this.label3.Location = new System.Drawing.Point(209, 5);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(33, 16);
             this.label3.TabIndex = 15;
@@ -602,9 +598,12 @@ namespace FirstTask
             // ID
             // 
             this.ID.Location = new System.Drawing.Point(91, 27);
+            this.ID.MaxLength = 3;
             this.ID.Name = "ID";
-            this.ID.Size = new System.Drawing.Size(73, 22);
+            this.ID.Size = new System.Drawing.Size(115, 22);
             this.ID.TabIndex = 14;
+            this.ID.Text = "000";
+            this.ID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ID_KeyPress);
             // 
             // label2
             // 
@@ -746,10 +745,9 @@ namespace FirstTask
         private System.Windows.Forms.ComboBox COMs;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox DLC;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox Data1;
-        private System.Windows.Forms.TextBox Data2;
+        private System.Windows.Forms.TextBox Data8;
+        private System.Windows.Forms.TextBox Data7;
         private System.Windows.Forms.Button set_bt;
         private System.Windows.Forms.TextBox Value;
         private System.Windows.Forms.Label label7;
@@ -759,12 +757,12 @@ namespace FirstTask
         private System.Windows.Forms.CheckBox bit29;
         private System.Windows.Forms.TextBox Comment;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox Data8;
-        private System.Windows.Forms.TextBox Data7;
-        private System.Windows.Forms.TextBox Data6;
-        private System.Windows.Forms.TextBox Data5;
-        private System.Windows.Forms.TextBox Data4;
+        private System.Windows.Forms.TextBox Data1;
+        private System.Windows.Forms.TextBox Data2;
         private System.Windows.Forms.TextBox Data3;
+        private System.Windows.Forms.TextBox Data4;
+        private System.Windows.Forms.TextBox Data5;
+        private System.Windows.Forms.TextBox Data6;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox14;
         private System.Windows.Forms.Label label9;
@@ -785,6 +783,7 @@ namespace FirstTask
         private System.Windows.Forms.Label label11;
         private SerialPort serialPort1;
         private System.Windows.Forms.ComboBox trigger_com;
+        private System.Windows.Forms.MaskedTextBox DLC;
     }
 }
 
