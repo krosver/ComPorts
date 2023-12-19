@@ -80,7 +80,6 @@ namespace FirstTask
             msg.RTR =Convert.ToInt32(RTR.Checked);
             msg.Bit29 = Convert.ToInt32(bit29.Checked);
             MessageBox.Show(msg.ToString());
-            CRC();
         }
 
         private void DLC_TextChanged(object sender, EventArgs e)
@@ -108,6 +107,7 @@ namespace FirstTask
             {
                 CultureInfo provider = new CultureInfo("en-US");
                 var isInt = int.TryParse(tb.Text, NumberStyles.HexNumber, provider, out var dlc);
+                // Проверяем, являются ли данные 16-ричным числом
                 if (!isInt)
                 {
                     MessageBox.Show("Неверный формат числа");
@@ -116,15 +116,6 @@ namespace FirstTask
             }
         }
 
-        private void CRC()
-        {
-            double sum = Math.Pow(msg.Data[0], 15) + Math.Pow(msg.Data[1], 14) + Math.Pow(msg.Data[2], 10) +
-                Math.Pow(msg.Data[3], 8) + Math.Pow(msg.Data[4], 7) + Math.Pow(msg.Data[5], 4) +
-                Math.Pow(msg.Data[6], 3) + Math.Pow(msg.Data[7], 0);
-            long l = (long)sum;
-            var hexstr = l.ToString("X8");
-            var b = 1;
-        }
 
         private void bit29_CheckedChanged(object sender, EventArgs e)
         {
