@@ -45,30 +45,7 @@ namespace FirstTask
             this.column_comment = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage_Set = new System.Windows.Forms.TabPage();
             this.DLC = new System.Windows.Forms.MaskedTextBox();
-            this.textBox17 = new System.Windows.Forms.TextBox();
-            this.textBox18 = new System.Windows.Forms.TextBox();
-            this.textBox19 = new System.Windows.Forms.TextBox();
-            this.textBox20 = new System.Windows.Forms.TextBox();
-            this.textBox21 = new System.Windows.Forms.TextBox();
-            this.textBox22 = new System.Windows.Forms.TextBox();
-            this.textBox23 = new System.Windows.Forms.TextBox();
-            this.textBox24 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.trigger_com = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.set_bt = new System.Windows.Forms.Button();
-            this.Value = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.Period = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.RTR = new System.Windows.Forms.CheckBox();
             this.bit29 = new System.Windows.Forms.CheckBox();
             this.Comment = new System.Windows.Forms.TextBox();
@@ -199,30 +176,7 @@ namespace FirstTask
             // tabPage_Set
             // 
             this.tabPage_Set.Controls.Add(this.DLC);
-            this.tabPage_Set.Controls.Add(this.textBox17);
-            this.tabPage_Set.Controls.Add(this.textBox18);
-            this.tabPage_Set.Controls.Add(this.textBox19);
-            this.tabPage_Set.Controls.Add(this.textBox20);
-            this.tabPage_Set.Controls.Add(this.textBox21);
-            this.tabPage_Set.Controls.Add(this.textBox22);
-            this.tabPage_Set.Controls.Add(this.textBox23);
-            this.tabPage_Set.Controls.Add(this.textBox24);
-            this.tabPage_Set.Controls.Add(this.label13);
-            this.tabPage_Set.Controls.Add(this.textBox16);
-            this.tabPage_Set.Controls.Add(this.label12);
-            this.tabPage_Set.Controls.Add(this.textBox15);
-            this.tabPage_Set.Controls.Add(this.label11);
-            this.tabPage_Set.Controls.Add(this.trigger_com);
-            this.tabPage_Set.Controls.Add(this.label10);
-            this.tabPage_Set.Controls.Add(this.textBox14);
-            this.tabPage_Set.Controls.Add(this.label9);
-            this.tabPage_Set.Controls.Add(this.comboBox2);
-            this.tabPage_Set.Controls.Add(this.label8);
             this.tabPage_Set.Controls.Add(this.set_bt);
-            this.tabPage_Set.Controls.Add(this.Value);
-            this.tabPage_Set.Controls.Add(this.label7);
-            this.tabPage_Set.Controls.Add(this.Period);
-            this.tabPage_Set.Controls.Add(this.label6);
             this.tabPage_Set.Controls.Add(this.RTR);
             this.tabPage_Set.Controls.Add(this.bit29);
             this.tabPage_Set.Controls.Add(this.Comment);
@@ -261,155 +215,6 @@ namespace FirstTask
             this.DLC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.DLC.TextChanged += new System.EventHandler(this.DLC_TextChanged);
             // 
-            // textBox17
-            // 
-            this.textBox17.Location = new System.Drawing.Point(1039, 123);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(25, 22);
-            this.textBox17.TabIndex = 53;
-            // 
-            // textBox18
-            // 
-            this.textBox18.Location = new System.Drawing.Point(1015, 123);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(25, 22);
-            this.textBox18.TabIndex = 52;
-            // 
-            // textBox19
-            // 
-            this.textBox19.Location = new System.Drawing.Point(991, 123);
-            this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(25, 22);
-            this.textBox19.TabIndex = 51;
-            // 
-            // textBox20
-            // 
-            this.textBox20.Location = new System.Drawing.Point(967, 123);
-            this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(25, 22);
-            this.textBox20.TabIndex = 50;
-            // 
-            // textBox21
-            // 
-            this.textBox21.Location = new System.Drawing.Point(943, 123);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(25, 22);
-            this.textBox21.TabIndex = 49;
-            // 
-            // textBox22
-            // 
-            this.textBox22.Location = new System.Drawing.Point(919, 123);
-            this.textBox22.Name = "textBox22";
-            this.textBox22.Size = new System.Drawing.Size(25, 22);
-            this.textBox22.TabIndex = 48;
-            // 
-            // textBox23
-            // 
-            this.textBox23.Location = new System.Drawing.Point(895, 123);
-            this.textBox23.Name = "textBox23";
-            this.textBox23.Size = new System.Drawing.Size(25, 22);
-            this.textBox23.TabIndex = 47;
-            // 
-            // textBox24
-            // 
-            this.textBox24.Location = new System.Drawing.Point(871, 123);
-            this.textBox24.Name = "textBox24";
-            this.textBox24.Size = new System.Drawing.Size(25, 22);
-            this.textBox24.TabIndex = 46;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(809, 126);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(57, 16);
-            this.label13.TabIndex = 45;
-            this.label13.Text = "Данные";
-            // 
-            // textBox16
-            // 
-            this.textBox16.Location = new System.Drawing.Point(732, 123);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(48, 22);
-            this.textBox16.TabIndex = 44;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(693, 126);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(33, 16);
-            this.label12.TabIndex = 43;
-            this.label12.Text = "DLC";
-            // 
-            // textBox15
-            // 
-            this.textBox15.Location = new System.Drawing.Point(572, 123);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(69, 22);
-            this.textBox15.TabIndex = 42;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(546, 126);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(20, 16);
-            this.label11.TabIndex = 41;
-            this.label11.Text = "ID";
-            // 
-            // trigger_com
-            // 
-            this.trigger_com.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.trigger_com.FormattingEnabled = true;
-            this.trigger_com.Location = new System.Drawing.Point(419, 122);
-            this.trigger_com.Name = "trigger_com";
-            this.trigger_com.Size = new System.Drawing.Size(88, 24);
-            this.trigger_com.TabIndex = 40;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(331, 126);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(82, 16);
-            this.label10.TabIndex = 39;
-            this.label10.Text = "Триггер CH";
-            // 
-            // textBox14
-            // 
-            this.textBox14.Location = new System.Drawing.Point(259, 124);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(49, 22);
-            this.textBox14.TabIndex = 38;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(184, 126);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(72, 16);
-            this.label9.TabIndex = 37;
-            this.label9.Text = "Задержка";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(89, 124);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(73, 24);
-            this.comboBox2.TabIndex = 36;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(10, 126);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(70, 16);
-            this.label8.TabIndex = 35;
-            this.label8.Text = "Действие";
-            // 
             // set_bt
             // 
             this.set_bt.Location = new System.Drawing.Point(496, 54);
@@ -419,38 +224,6 @@ namespace FirstTask
             this.set_bt.Text = "Заполнить";
             this.set_bt.UseVisualStyleBackColor = true;
             this.set_bt.Click += new System.EventHandler(this.SetMessageButton_click);
-            // 
-            // Value
-            // 
-            this.Value.Location = new System.Drawing.Point(411, 57);
-            this.Value.Name = "Value";
-            this.Value.Size = new System.Drawing.Size(33, 22);
-            this.Value.TabIndex = 33;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(332, 60);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(72, 16);
-            this.label7.TabIndex = 32;
-            this.label7.Text = "Значение";
-            // 
-            // Period
-            // 
-            this.Period.Location = new System.Drawing.Point(259, 56);
-            this.Period.Name = "Period";
-            this.Period.Size = new System.Drawing.Size(49, 22);
-            this.Period.TabIndex = 31;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(172, 60);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(84, 16);
-            this.label6.TabIndex = 30;
-            this.label6.Text = "Период (мс)";
             // 
             // RTR
             // 
@@ -749,10 +522,6 @@ namespace FirstTask
         private System.Windows.Forms.TextBox Data8;
         private System.Windows.Forms.TextBox Data7;
         private System.Windows.Forms.Button set_bt;
-        private System.Windows.Forms.TextBox Value;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox Period;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox RTR;
         private System.Windows.Forms.CheckBox bit29;
         private System.Windows.Forms.TextBox Comment;
@@ -763,26 +532,7 @@ namespace FirstTask
         private System.Windows.Forms.TextBox Data4;
         private System.Windows.Forms.TextBox Data5;
         private System.Windows.Forms.TextBox Data6;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox17;
-        private System.Windows.Forms.TextBox textBox18;
-        private System.Windows.Forms.TextBox textBox19;
-        private System.Windows.Forms.TextBox textBox20;
-        private System.Windows.Forms.TextBox textBox21;
-        private System.Windows.Forms.TextBox textBox22;
-        private System.Windows.Forms.TextBox textBox23;
-        private System.Windows.Forms.TextBox textBox24;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox16;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox15;
-        private System.Windows.Forms.Label label11;
         private SerialPort serialPort1;
-        private System.Windows.Forms.ComboBox trigger_com;
         private System.Windows.Forms.MaskedTextBox DLC;
     }
 }
