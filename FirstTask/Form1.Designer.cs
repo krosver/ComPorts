@@ -39,9 +39,6 @@ namespace FirstTask
             this.column_ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.column_DLC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.column_data = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.column_period = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.column_counter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.column_ASCII = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.column_comment = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage_Set = new System.Windows.Forms.TabPage();
             this.DLC = new System.Windows.Forms.MaskedTextBox();
@@ -65,15 +62,12 @@ namespace FirstTask
             this.COMs = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.listView2 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.SetColumn_CH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.SetColumn_flags = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.SetColumn_ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.SetColumn_DLC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.SetColumn_Data = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.SetColumn_Comment = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage_Get.SuspendLayout();
@@ -115,9 +109,6 @@ namespace FirstTask
             this.column_ID,
             this.column_DLC,
             this.column_data,
-            this.column_period,
-            this.column_counter,
-            this.column_ASCII,
             this.column_comment});
             this.listView1.FullRowSelect = true;
             this.listView1.HideSelection = false;
@@ -141,36 +132,22 @@ namespace FirstTask
             // column_ID
             // 
             this.column_ID.Text = "ID";
+            this.column_ID.Width = 150;
             // 
             // column_DLC
             // 
             this.column_DLC.Text = "DLC";
-            this.column_DLC.Width = 40;
+            this.column_DLC.Width = 38;
             // 
             // column_data
             // 
             this.column_data.Text = "Данные";
-            this.column_data.Width = 119;
-            // 
-            // column_period
-            // 
-            this.column_period.Text = "Период";
-            this.column_period.Width = 50;
-            // 
-            // column_counter
-            // 
-            this.column_counter.Text = "Счетчик";
-            this.column_counter.Width = 55;
-            // 
-            // column_ASCII
-            // 
-            this.column_ASCII.Text = "ASCII";
-            this.column_ASCII.Width = 84;
+            this.column_data.Width = 167;
             // 
             // column_comment
             // 
             this.column_comment.Text = "Комментарий";
-            this.column_comment.Width = 360;
+            this.column_comment.Width = 314;
             // 
             // tabPage_Set
             // 
@@ -376,7 +353,6 @@ namespace FirstTask
             this.ID.TabIndex = 14;
             this.ID.Text = "000";
             this.ID.TextChanged += new System.EventHandler(this.ID_TextChanged);
-            //this.ID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ID_KeyPress);
             // 
             // label2
             // 
@@ -411,15 +387,12 @@ namespace FirstTask
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader7,
-            this.columnHeader8,
-            this.columnHeader9});
+            this.SetColumn_CH,
+            this.SetColumn_flags,
+            this.SetColumn_ID,
+            this.SetColumn_DLC,
+            this.SetColumn_Data,
+            this.SetColumn_Comment});
             this.listView2.FullRowSelect = true;
             this.listView2.HideSelection = false;
             this.listView2.Location = new System.Drawing.Point(3, 168);
@@ -429,49 +402,35 @@ namespace FirstTask
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeader1
+            // SetColumn_CH
             // 
-            this.columnHeader1.Text = "CH";
-            this.columnHeader1.Width = 30;
+            this.SetColumn_CH.Text = "CH";
+            this.SetColumn_CH.Width = 30;
             // 
-            // columnHeader2
+            // SetColumn_flags
             // 
-            this.columnHeader2.Text = "Флаги";
-            this.columnHeader2.Width = 50;
+            this.SetColumn_flags.Text = "Флаги";
+            this.SetColumn_flags.Width = 50;
             // 
-            // columnHeader3
+            // SetColumn_ID
             // 
-            this.columnHeader3.Text = "ID";
+            this.SetColumn_ID.Text = "ID";
+            this.SetColumn_ID.Width = 100;
             // 
-            // columnHeader4
+            // SetColumn_DLC
             // 
-            this.columnHeader4.Text = "DLC";
-            this.columnHeader4.Width = 40;
+            this.SetColumn_DLC.Text = "DLC";
+            this.SetColumn_DLC.Width = 40;
             // 
-            // columnHeader5
+            // SetColumn_Data
             // 
-            this.columnHeader5.Text = "Данные";
-            this.columnHeader5.Width = 119;
+            this.SetColumn_Data.Text = "Данные";
+            this.SetColumn_Data.Width = 150;
             // 
-            // columnHeader6
+            // SetColumn_Comment
             // 
-            this.columnHeader6.Text = "Период";
-            this.columnHeader6.Width = 50;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Счетчик";
-            this.columnHeader7.Width = 55;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "ASCII";
-            this.columnHeader8.Width = 84;
-            // 
-            // columnHeader9
-            // 
-            this.columnHeader9.Text = "Комментарий";
-            this.columnHeader9.Width = 360;
+            this.SetColumn_Comment.Text = "Комментарий";
+            this.SetColumn_Comment.Width = 360;
             // 
             // Form1
             // 
@@ -499,20 +458,14 @@ namespace FirstTask
         private System.Windows.Forms.ColumnHeader column_ID;
         private System.Windows.Forms.ColumnHeader column_DLC;
         private System.Windows.Forms.ColumnHeader column_data;
-        private System.Windows.Forms.ColumnHeader column_period;
-        private System.Windows.Forms.ColumnHeader column_counter;
-        private System.Windows.Forms.ColumnHeader column_ASCII;
         private System.Windows.Forms.ColumnHeader column_comment;
         private System.Windows.Forms.ListView listView2;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
-        private System.Windows.Forms.ColumnHeader columnHeader8;
-        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ColumnHeader SetColumn_CH;
+        private System.Windows.Forms.ColumnHeader SetColumn_flags;
+        private System.Windows.Forms.ColumnHeader SetColumn_ID;
+        private System.Windows.Forms.ColumnHeader SetColumn_DLC;
+        private System.Windows.Forms.ColumnHeader SetColumn_Data;
+        private System.Windows.Forms.ColumnHeader SetColumn_Comment;
         private System.Windows.Forms.TextBox ID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox COMs;

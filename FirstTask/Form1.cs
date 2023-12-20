@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using System.Security.Authentication.ExtendedProtection;
+using System.Diagnostics.Eventing.Reader;
 
 namespace FirstTask
 {
@@ -20,9 +22,9 @@ namespace FirstTask
     {
         bool ide => bit29.Checked;
         bool rtr => RTR.Checked;
-
-        int id => int.Parse(ID.Text, NumberStyles.HexNumber);
+        int id; //=> int.Parse(ID.Text, NumberStyles.HexNumber);
         byte dlc => Convert.ToByte(DLC.Text);
+        string comment => Comment.Text;
         int[] data => new int[] 
         {   int.Parse(Data1.Text, NumberStyles.HexNumber), 
             int.Parse(Data2.Text, NumberStyles.HexNumber),
@@ -33,6 +35,8 @@ namespace FirstTask
             int.Parse(Data7.Text, NumberStyles.HexNumber),
             int.Parse(Data8.Text, NumberStyles.HexNumber),
         };
+        string channel => COMs.Text.Trim();
+
 
         CAN_Message message;
 
@@ -40,25 +44,62 @@ namespace FirstTask
 
         private string[] ports => SerialPort.GetPortNames();
         private TextBox[] dataBoxes;
+        private SerialPort serialPort;
         public Form1()
         {
             InitializeComponent();
             GetAllPorst();
             config = JsonSerializer.Deserialize<Config>(File.OpenRead("config.json"));
             dataBoxes = new TextBox[] { Data1, Data2, Data3, Data4, Data5, Data6, Data7, Data8 };
+            SerialPortsFunction();
         }
-        private void AddMessage(ListView listView)
+        private void SerialPortsFunction()
         {
-            //ListViewItem message = new ListViewItem(msgData["CH"]);
-            //message.SubItems.Add(msgData["Флаги"]);
-            //message.SubItems.Add(msgData["ID"]);
-            //message.SubItems.Add(msgData["DLC"]);
-            //message.SubItems.Add(msgData["Данные"]);
-            //message.SubItems.Add(msgData["Период"]);
-            //message.SubItems.Add(msgData["Счетчик"]);
-            //message.SubItems.Add(msgData["ASCII"]);
-            //message.SubItems.Add(msgData["Коментарий"]);
-            //listView.Items.Add(message);
+            serialPort = new SerialPort("COM5", 9600); // Укажите нужные параметры порта
+            try
+            {
+                // Открываем порт
+                serialPort.Open();
+
+                // Присоединяем обработчик события при получении данных
+                serialPort.DataReceived += SerialPort_DataReceived;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка: " + ex.Message);
+            }
+            finally
+            {
+                // Закрываем порт при завершении программы
+                if (serialPort.IsOpen)
+                    serialPort.Close();
+            }
+        }
+        private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            // Обработчик события при получении данных с порта
+            SerialPort sp = (SerialPort)sender;
+
+            // Читаем все доступные данные из порта
+            string data = sp.ReadExisting();
+
+            CAN_Message msg;
+            msg = new CAN_Message(data);
+            listView1.Items.Add(msg);
+
+        }
+        private void SendData(string data)
+        {
+            try
+            {
+                // Отправляем данные по COM-порту
+                serialPort.Write(data);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при отправке данных: " + ex.Message);
+            }
         }
         private void GetAllPorst()
         {
@@ -68,7 +109,17 @@ namespace FirstTask
         }
         private void SetMessageButton_click(object sender, EventArgs e)
         {
-            message = new CAN_Message(id,ide,rtr,dlc, data);
+            if (int.TryParse(ID.Text, out int id)) { }
+            else
+            {
+                CultureInfo provider = new CultureInfo("en-US");
+                id = int.Parse(ID.Text, NumberStyles.HexNumber);
+            }
+
+            message = new CAN_Message(channel, id, ide, rtr, dlc, data, comment);
+            listView2.Items.Add(message);
+            //listView1.Items.Add(message);
+            SendData(message.To_Binary());
         }
 
         private void DLC_TextChanged(object sender, EventArgs e)
