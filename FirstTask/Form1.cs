@@ -18,68 +18,57 @@ namespace FirstTask
 {
     public partial class Form1 : Form
     {
-        CanMsg msg = new CanMsg();
-        private Config config;
-        private Dictionary<string, string> msgData = new Dictionary<string, string>()
-        {
-            {"CH",""},
-            {"Флаги",""},
-            {"ID",""},
-            {"DLC",""},
-            {"Данные",""},
-            {"Период",""},
-            {"Счетчик",""},
-            {"ASCII",""},
-            {"Коментарий",""},
-        };
-        private string[] ports => SerialPort.GetPortNames();
+        bool ide => bit29.Checked;
+        bool rtr => RTR.Checked;
 
-        private bool nonNumberEntered;
+        int id => int.Parse(ID.Text, NumberStyles.HexNumber);
+        byte dlc => Convert.ToByte(DLC.Text);
+        int[] data => new int[] 
+        {   int.Parse(Data1.Text, NumberStyles.HexNumber), 
+            int.Parse(Data2.Text, NumberStyles.HexNumber),
+            int.Parse(Data3.Text, NumberStyles.HexNumber),
+            int.Parse(Data4.Text, NumberStyles.HexNumber),
+            int.Parse(Data5.Text, NumberStyles.HexNumber),
+            int.Parse(Data6.Text, NumberStyles.HexNumber),
+            int.Parse(Data7.Text, NumberStyles.HexNumber),
+            int.Parse(Data8.Text, NumberStyles.HexNumber),
+        };
+
+        CAN_Message message;
+
+        private Config config;
+
+        private string[] ports => SerialPort.GetPortNames();
         private TextBox[] dataBoxes;
         public Form1()
         {
             InitializeComponent();
             GetAllPorst();
             config = JsonSerializer.Deserialize<Config>(File.OpenRead("config.json"));
-            dataBoxes = new TextBox[] { Data8, Data7, Data6, Data5, Data4, Data3, Data2, Data1 };
+            dataBoxes = new TextBox[] { Data1, Data2, Data3, Data4, Data5, Data6, Data7, Data8 };
         }
         private void AddMessage(ListView listView)
         {
-            ListViewItem message = new ListViewItem(msgData["CH"]);
-            message.SubItems.Add(msgData["Флаги"]);
-            message.SubItems.Add(msgData["ID"]);
-            message.SubItems.Add(msgData["DLC"]);
-            message.SubItems.Add(msgData["Данные"]);
-            message.SubItems.Add(msgData["Период"]);
-            message.SubItems.Add(msgData["Счетчик"]);
-            message.SubItems.Add(msgData["ASCII"]);
-            message.SubItems.Add(msgData["Коментарий"]);
-            listView.Items.Add(message);
+            //ListViewItem message = new ListViewItem(msgData["CH"]);
+            //message.SubItems.Add(msgData["Флаги"]);
+            //message.SubItems.Add(msgData["ID"]);
+            //message.SubItems.Add(msgData["DLC"]);
+            //message.SubItems.Add(msgData["Данные"]);
+            //message.SubItems.Add(msgData["Период"]);
+            //message.SubItems.Add(msgData["Счетчик"]);
+            //message.SubItems.Add(msgData["ASCII"]);
+            //message.SubItems.Add(msgData["Коментарий"]);
+            //listView.Items.Add(message);
         }
         private void GetAllPorst()
         {
             COMs.Items.Clear();
-            trigger_com.Items.Clear();
-
             COMs.Items.AddRange(ports);
 
-            trigger_com.Items.Add("Все");
-            trigger_com.Items.AddRange(ports);
         }
         private void SetMessageButton_click(object sender, EventArgs e)
         {
-            //msg.CH = COMs.Text;
-            //msg.Flags = "COM";
-            msg.ID = int.Parse(ID.Text);
-            msg.DLC = int.Parse(DLC.Text); 
-            msg.Data = new int[]{
-                int.Parse(Data8.Text,NumberStyles.HexNumber), int.Parse(Data7.Text,NumberStyles.HexNumber), int.Parse(Data6.Text,NumberStyles.HexNumber),
-                int.Parse(Data5.Text,NumberStyles.HexNumber), int.Parse(Data4.Text,NumberStyles.HexNumber), int.Parse(Data3.Text,NumberStyles.HexNumber),
-                int.Parse(Data2.Text,NumberStyles.HexNumber), int.Parse(Data1.Text,NumberStyles.HexNumber)};
-            //msg.Comment = Comment.Text;
-            msg.RTR =Convert.ToInt32(RTR.Checked);
-            msg.Bit29 = Convert.ToInt32(bit29.Checked);
-            MessageBox.Show(msg.ToString());
+            message = new CAN_Message(id,ide,rtr,dlc, data);
         }
 
         private void DLC_TextChanged(object sender, EventArgs e)
@@ -94,6 +83,7 @@ namespace FirstTask
                 for (int i = dlc; i < 8; i++)
                 {
                     dataBoxes[i].Enabled = false;
+                    dataBoxes[i].Text = "00";
                 }
             }
             else
@@ -119,7 +109,7 @@ namespace FirstTask
 
         private void bit29_CheckedChanged(object sender, EventArgs e)
         {
-            if (bit29.Checked)
+            if (ide)
             {
                 // ID 29 бит
                 ID.Text = ID.Text.PadLeft(8, '0');
@@ -133,19 +123,20 @@ namespace FirstTask
             }
         }
 
-        private void ID_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void ID_TextChanged(object sender, EventArgs e)
         {
-            // Проверяем, является ли введенный символ цифрой
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (ID.Text.Length > 0)
             {
-                // Если символ не цифра и не управляющий символ, отменяем ввод
-                e.Handled = true;
+                CultureInfo provider = new CultureInfo("en-US");
+                var isInt = int.TryParse(ID.Text, NumberStyles.HexNumber, provider, out var dlc);
+                // Проверяем, являются ли данные 16-ричным числом
+                if (!isInt)
+                {
+                    MessageBox.Show("Неверный формат числа");
+                    ID.Text = "";
+                }
             }
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

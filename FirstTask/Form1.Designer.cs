@@ -127,7 +127,6 @@ namespace FirstTask
             this.listView1.TabIndex = 9;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // column_CH
             // 
@@ -264,7 +263,7 @@ namespace FirstTask
             // 
             // Data1
             // 
-            this.Data1.Location = new System.Drawing.Point(426, 27);
+            this.Data1.Location = new System.Drawing.Point(251, 27);
             this.Data1.MaxLength = 2;
             this.Data1.Name = "Data1";
             this.Data1.Size = new System.Drawing.Size(25, 22);
@@ -275,7 +274,7 @@ namespace FirstTask
             // 
             // Data2
             // 
-            this.Data2.Location = new System.Drawing.Point(401, 27);
+            this.Data2.Location = new System.Drawing.Point(276, 27);
             this.Data2.MaxLength = 2;
             this.Data2.Name = "Data2";
             this.Data2.Size = new System.Drawing.Size(25, 22);
@@ -286,7 +285,7 @@ namespace FirstTask
             // 
             // Data3
             // 
-            this.Data3.Location = new System.Drawing.Point(376, 27);
+            this.Data3.Location = new System.Drawing.Point(301, 27);
             this.Data3.MaxLength = 2;
             this.Data3.Name = "Data3";
             this.Data3.Size = new System.Drawing.Size(25, 22);
@@ -297,7 +296,7 @@ namespace FirstTask
             // 
             // Data4
             // 
-            this.Data4.Location = new System.Drawing.Point(351, 27);
+            this.Data4.Location = new System.Drawing.Point(326, 27);
             this.Data4.MaxLength = 2;
             this.Data4.Name = "Data4";
             this.Data4.Size = new System.Drawing.Size(25, 22);
@@ -308,7 +307,7 @@ namespace FirstTask
             // 
             // Data5
             // 
-            this.Data5.Location = new System.Drawing.Point(326, 27);
+            this.Data5.Location = new System.Drawing.Point(351, 27);
             this.Data5.MaxLength = 2;
             this.Data5.Name = "Data5";
             this.Data5.Size = new System.Drawing.Size(25, 22);
@@ -319,7 +318,7 @@ namespace FirstTask
             // 
             // Data6
             // 
-            this.Data6.Location = new System.Drawing.Point(301, 27);
+            this.Data6.Location = new System.Drawing.Point(376, 27);
             this.Data6.MaxLength = 2;
             this.Data6.Name = "Data6";
             this.Data6.Size = new System.Drawing.Size(25, 22);
@@ -330,7 +329,7 @@ namespace FirstTask
             // 
             // Data7
             // 
-            this.Data7.Location = new System.Drawing.Point(276, 27);
+            this.Data7.Location = new System.Drawing.Point(401, 27);
             this.Data7.MaxLength = 2;
             this.Data7.Name = "Data7";
             this.Data7.Size = new System.Drawing.Size(25, 22);
@@ -341,7 +340,7 @@ namespace FirstTask
             // 
             // Data8
             // 
-            this.Data8.Location = new System.Drawing.Point(251, 27);
+            this.Data8.Location = new System.Drawing.Point(426, 27);
             this.Data8.MaxLength = 2;
             this.Data8.Name = "Data8";
             this.Data8.Size = new System.Drawing.Size(25, 22);
@@ -376,7 +375,8 @@ namespace FirstTask
             this.ID.Size = new System.Drawing.Size(115, 22);
             this.ID.TabIndex = 14;
             this.ID.Text = "000";
-            this.ID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ID_KeyPress);
+            this.ID.TextChanged += new System.EventHandler(this.ID_TextChanged);
+            //this.ID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ID_KeyPress);
             // 
             // label2
             // 
